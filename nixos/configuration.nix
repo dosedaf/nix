@@ -2,8 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, lib, ... }:
-{ imports =
+{ config, pkgs, lib, ... }: { imports =
     [ 
     	./an515-58.nix
     ];
@@ -12,6 +11,7 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   nix.settings.experimental-features = [ "nix-command flakes" ];
+  boot.kernelParams = [ "acpi_backlight=video"];
 
   networking = {
     hostName = "dosed"; # Define your hostname.
@@ -55,12 +55,15 @@
     isNormalUser = true;
     description = "yoda";
     useDefaultShell = true;
-    extraGroups = [ "networkmanager" "wheel" "audio"];
+    extraGroups = [ "networkmanager" "wheel" "audio" "video"];
     packages = with pkgs; [];
   };
 
   programs.zsh.enable = true;
   fonts.packages = with pkgs; [ nerdfonts];
+
+  hardware.acpilight.enable = true;
+  programs.light.enable = true;
 
   # Allow unfree packages
   # nixpkgs.config.allowUnfree = true;
@@ -70,12 +73,17 @@
 
   environment.systemPackages = with pkgs; [
     # core
+    p7zip
     bash
     git
     neovim
     zsh
     kitty
     kitty-themes
+    
+    j4-dmenu-desktop
+    bemenu
+    joplin-desktop
 
     # wayland utils
     grim
@@ -90,6 +98,11 @@
 
     # network tools
     networkmanager
+
+    brightnessctl
+    ddcutil
+
+    xorg.xbacklight
   ];
 
   # desktop portals
