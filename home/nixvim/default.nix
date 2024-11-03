@@ -1,6 +1,6 @@
 { pkgs, lib, ... }:
 {
-	nixvim = {
+	programs.nixvim = {
 		enable = true;
 		defaultEditor = true;
 		opts = {
@@ -35,18 +35,18 @@
 					auto_install = false;
 					ensure_installed = [
 						"c"
-						"bash"
-						"cpp"
-						"git_config"
-						"gitignore"
-						"gitcommit"
-						"go"
-						"lua"
-						"llvm"
-						"javascript"
-						"php"
-						"rust"
-						"tmux"
+							"bash"
+							"cpp"
+							"git_config"
+							"gitignore"
+							"gitcommit"
+							"go"
+							"lua"
+							"llvm"
+							"javascript"
+							"php"
+							"rust"
+							"tmux"
 					];
 
 					highlight.enable = true;
@@ -55,6 +55,5 @@
 			};
 		};
 	};
-};
 
-	}
+}
