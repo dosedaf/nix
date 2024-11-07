@@ -1,60 +1,144 @@
-{ lib, ... }:
+{ lib, pkgs, ... }:
 {
-	programs.nixvim = {
-		enable = true;
-		defaultEditor = true;
-		opts = {
-			cursorline = true;
-			shiftwidth = 2;
-			tabstop = 2;
-			relativenumber = true;
-			number = true;
-		};
+  programs.nixvim = {
+    enable = true;
+    defaultEditor = true;
+    opts = {
+      cursorline = true;
+      shiftwidth = 2;
+      tabstop = 2;
+      relativenumber = true;
+      number = true;
+    };
 
-		plugins = {
-			lsp = {
-				enable = true;
-				servers = {
-					gopls = {
-						enable = true;
-						extraOptions = {
-							gopls.semanticTokens = true;
-						};
-					};
-					html.enable = true;
-					cssls.enable = true;
-					jsonls.enable = true;
-					clangd.enable = true;
-					nixd.enable = true;
-				};
-			};
+    plugins = {
+      lsp = {
+        enable = true;
+        servers = {
+          # Existing servers
+          gopls = {
+            enable = true;
+            extraOptions = {
+              gopls.semanticTokens = true;
+            };
+          };
+          html.enable = true;
+          htmx.enable = true;
+          lua_ls.enable = true;
+          cssls.enable = true;
+          jsonls.enable = true;
+          clangd.enable = true;
+          nixd.enable = true;
 
-			treesitter = {
-				enable = true;
-				settings = {
-					auto_install = false;
-					ensure_installed = [
-						"c"
-						"bash"
-						"cpp"
-						"git_config"
-						"gitignore"
-						"gitcommit"
-						"go"
-						"lua"
-						"llvm"
-						"javascript"
-						"php"
-						"rust"
-						"tmux"
-						"nix"
-					];
+          # PHP-specific LSP servers
+          intelephense = {
+            enable = true;
+						package = pkgs.intelephense;
+            extraOptions = {
+              intelephense = {
+                stubs = [
+                  "apache"
+                  "bcmath"
+                  "bz2"
+                  "calendar"
+                  "com_dotnet"
+                  "Core"
+                  "curl"
+                  "date"
+                  "dba"
+                  "dom"
+                  "enchant"
+                  "fileinfo"
+                  "filter"
+                  "fpm"
+                  "ftp"
+                  "gd"
+                  "hash"
+                  "iconv"
+                  "imap"
+                  "intl"
+                  "json"
+                  "ldap"
+                  "libxml"
+                  "mbstring"
+                  "mcrypt"
+                  "mysql"
+                  "mysqli"
+                  "password"
+                  "pcntl"
+                  "pdo"
+                  "pgsql"
+                  "phar"
+                  "readline"
+                  "recode"
+                  "reflection"
+                  "session"
+                  "simplexml"
+                  "soap"
+                  "sockets"
+                  "sodium"
+                  "spl"
+                  "standard"
+                  "superglobals"
+                  "tokenizer"
+                  "xml"
+                  "xsl"
+                  "zip"
+                  "zlib"
+                  "wordpress"
+                  "phpunit"
+                  "laravel"
+                ];
+                completion = {
+                  insertUseDeclaration = true;
+                  fullyQualifyGlobalConstantsAndFunctions = true;
+                };
+								diagnostics = {
+									enable = true;	
+								};
+              };
+            };
+          };
+        };
+      };
 
-					highlight.enable = true;
-					indent.enable = true;
-				};
-			};
-			telescope = {
+			web-devicons.enable = true;
+
+      treesitter = {
+        enable = true;
+        settings = {
+          auto_install = false;
+          ensure_installed = [
+            "c"
+            "bash"
+            "cpp"
+            "git_config"
+            "gitignore"
+            "gitcommit"
+            "go"
+            "lua"
+            "llvm"
+            "javascript"
+            "php"
+            "rust"
+            "tmux"
+            "nix"
+            # Additional parsers for PHP/Laravel development
+            "php"
+            "phpdoc"
+            "sql"
+            "html"
+            "css"
+            "json"
+            "yaml"
+          ];
+
+          highlight.enable = true;
+          indent.enable = true;
+        };
+      };
+
+      telescope = {
         enable = true;
         keymaps = {
           "<leader><space>" = "find_files";
@@ -75,27 +159,11 @@
           performance = {
             maxViewEntries = 10;
           };
-					/*
-          snippet = {
-            expand = ''
-              function(args)
-                require('luasnip').lsp_expand(args.body)
-              end
-            '';
-          };
-					*/
           sources = [
             { name = "nvim_lsp"; }
-            {
-              name = "path"; # file system paths
-            }
-            {
-              name = "luasnip"; # snippets
-            }
-            # { name = "nvim_lsp_signature_help"; }
-            # { name = "codeium"; }
-            # { name = "buffer"; }
-            # { name = "luasnip"; }
+            { name = "path"; }
+            { name = "luasnip"; }
+            { name = "buffer"; }  # Enable buffer completion for better PHP completion
           ];
           formatting = {
             fields = [
@@ -134,22 +202,6 @@
             "<CR>" = "cmp.config.disable";
             "<Up>" = "cmp.mapping(cmp.mapping.select_prev_item(), {'i', 's'})";
             "<Down>" = "cmp.mapping(cmp.mapping.select_next_item(), {'i', 's'})";
-            # "<CR>" = ''
-            #   cmp.mapping(function(fallback)
-            #     local luasnip = require('luasnip')
-            #     if cmp.visible() then
-            #       if luasnip.expandable() then
-            #         luasnip.expand()
-            #       else
-            #         cmp.confirm({
-            #           select = true,
-            #         })
-            #       end
-            #     else
-            #       fallback()
-            #     end
-            #   end)
-            # '';
             "<Tab>" = ''
               cmp.mapping(function(fallback)
                 local luasnip = require('luasnip')
@@ -186,7 +238,7 @@
       cmp-path.enable = true;
       cmp-nvim-lsp-signature-help.enable = true;
       cmp_luasnip.enable = true;
-			luasnip.enable = true;
+      luasnip.enable = true;
       conform-nvim = {
         enable = true;
         settings = {
@@ -209,12 +261,14 @@
             ];
             markdown = [ "mdformat" ];
             "_" = [ "trim_whitespace" ];
+            # PHP formatting
+            php = [ "php-cs-fixer" ];
+            blade = [ "blade-formatter" ];
           };
         };
       };
       nvim-autopairs.enable = true;
-			wakatime.enable = true;
-		};
-	};
-
+      wakatime.enable = true;
+    };
+  };
 }

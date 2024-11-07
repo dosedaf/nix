@@ -146,6 +146,8 @@
 
 		extraConfig = ''
 			exec-once=zsh ~/system/script/start.sh
+			windowrule = workspace 1, $terminal
+			windowrule = workspace 2, firefox
 		'';
 
 	}; # wayland.windowManager.hyprland

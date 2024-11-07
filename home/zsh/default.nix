@@ -19,6 +19,7 @@
 			nixrbb = "sudo nixos-rebuild boot --flake ~/system#dosed";
 			nixconf = "cd ~/system/nixos && nvim .";
 			homeconf = "cd ~/system/home && nvim .";
+			crun = "g++ main.cpp -o main && ./main";
 		};
 		oh-my-zsh = {
 			enable = true;

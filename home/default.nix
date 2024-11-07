@@ -13,6 +13,18 @@
     homeDirectory = "/home/yoda";
     stateVersion = "24.05";
     packages = with pkgs; [
+			# jetbrains.phpstorm
+			# jetbrains.goland
+			# jetbrains.webstorm
+
+			intelephense
+			php82Packages.php-cs-fixer
+			blade-formatter
+			unzip
+			vscode
+			vlc
+			discord
+
 			obs-studio
 			oh-my-zsh
 			tmux
