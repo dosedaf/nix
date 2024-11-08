@@ -14,8 +14,10 @@
     stateVersion = "24.05";
     packages = with pkgs; [
 			# jetbrains.phpstorm
-			# jetbrains.goland
+			# jetbrains.xgoland
 			# jetbrains.webstorm
+			go
+			spotify
 
 			intelephense
 			php82Packages.php-cs-fixer
