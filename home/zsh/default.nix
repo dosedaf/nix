@@ -20,6 +20,7 @@
 			nixconf = "cd ~/system/nixos && nvim .";
 			homeconf = "cd ~/system/home && nvim .";
 			crun = "g++ main.cpp -o main && ./main";
+			gaa = "git add --all";
 		};
 		oh-my-zsh = {
 			enable = true;

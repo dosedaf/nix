@@ -11,6 +11,14 @@
       number = true;
     };
 
+		keymaps = [
+			{
+				mode = "n";
+				key = "<leader>pv";
+				action = "vim.cmd.Ex";
+			}
+		];
+
     plugins = {
       lsp = {
         enable = true;
@@ -103,6 +111,17 @@
       };
 
 			web-devicons.enable = true;
+
+			nvim-tree = {
+        enable = false;
+        autoReloadOnWrite = false;
+        disableNetrw = true;
+        hijackCursor = true;
+        diagnostics.enable = true;
+        filesystemWatchers.enable = true;
+        git.enable = true;
+        updateFocusedFile.enable = true;
+      };
 
       treesitter = {
         enable = true;
@@ -270,5 +289,11 @@
       nvim-autopairs.enable = true;
       wakatime.enable = true;
     };
+
+		extraPlugins = [
+			pkgs.vimPlugins.tokyonight-nvim
+			pkgs.vimPlugins.bamboo-nvim
+		];
+		colorscheme = "bamboo";
   };
 }

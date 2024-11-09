@@ -11,11 +11,23 @@
   home = {
     username = "yoda";
     homeDirectory = "/home/yoda";
-    stateVersion = "24.05";
-    packages = with pkgs; [
-			# jetbrains.phpstorm
-			# jetbrains.xgoland
-			# jetbrains.webstorm
+		stateVersion = "24.05";
+		packages = with pkgs; [
+			lsof
+			air
+			glibc
+			protobuf
+			protoc-gen-go
+			gofumpt                # Go formatter
+			goimports-reviser       # Go imports reviser
+			golines                 # Go line formatter
+			mdformat                # Markdown formatter
+			nixpkgs-fmt             # Nix formatter
+			prettierd               # Prettier daemon for formatting
+			jetbrains.phpstorm
+			jetbrains.goland 
+			jetbrains.webstorm
+			wf-recorder
 			go
 			spotify
 

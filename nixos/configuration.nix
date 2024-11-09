@@ -2,8 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, lib, ... }: { imports =
-    [ 
+{ config, pkgs, lib, ... }: { imports = [ 
     	./an515-58.nix
     ];
 
@@ -23,7 +22,20 @@
   # networking.proxy.default = "http://user:password@proxy:port/";
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
-  # Enable networking
+	# Enable networking
+	services.postgresql = {
+    enable = true;
+    ensureDatabases = [ "mydatabase" ];
+    authentication = pkgs.lib.mkOverride 10 ''
+      #type database  DBuser  auth-method
+      local all       all     trust
+    '';
+  };
+
+	services.mysql = {
+		enable = true;
+		package = pkgs.mariadb;
+	};
 
   # Set your time zone.
   time.timeZone = "Asia/Jakarta";
@@ -72,6 +84,8 @@
   };
 
   environment.systemPackages = with pkgs; [
+		gcc
+		glibc
     # core
     p7zip
     bash
@@ -163,10 +177,10 @@
   services.pipewire = {
     enable = true;
     alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = true;
-    jack.enable = true;
-};
+		alsa.support32Bit = true;
+		pulse.enable = true;
+		jack.enable = true;
+	};
 
 
   # List packages installed in system profile. To search, run:
@@ -198,5 +212,4 @@
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "24.05"; # Did you read the comment?
-
 }
