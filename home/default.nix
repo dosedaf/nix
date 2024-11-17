@@ -13,6 +13,16 @@
     homeDirectory = "/home/yoda";
 		stateVersion = "24.05";
 		packages = with pkgs; [
+			# download manager
+			deluged
+			pyload-ng
+
+			# lsp
+			vscode-langservers-extracted
+			nodejs_22
+			prettierd
+			zoom-us
+
 			lsof
 			air
 			glibc
@@ -43,23 +53,28 @@
 			oh-my-zsh
 			tmux
 			fzf
+
       # virtualisation
       distrobox
       clip
       libgccjit
+
       # i fw w these
       kitty
       fastfetch
       firefox
       brave
+
       # wayland tools
       waybar
       dunst 
       swww
       rofi-wayland
+
       # additional utils
       atool
       httpie
+
       # c/c++
       gcc
       cmake

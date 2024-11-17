@@ -11,17 +11,11 @@
       number = true;
     };
 
-		globals.mapleader = " ";
 		keymaps = [
 			{
 				mode = "n";
 				key = "<leader>pv";
 				action = "vim.cmd.Ex";
-			}
-			{
-				mode = "n";
-				key = "<leader>e";
-				action = ":NvimTreeToggle<CR>";
 			}
 		];
 
@@ -117,6 +111,17 @@
       };
 
 			web-devicons.enable = true;
+
+			nvim-tree = {
+        enable = false;
+        autoReloadOnWrite = false;
+        disableNetrw = true;
+        hijackCursor = true;
+        diagnostics.enable = true;
+        filesystemWatchers.enable = true;
+        git.enable = true;
+        updateFocusedFile.enable = true;
+      };
 
       treesitter = {
         enable = true;
@@ -283,32 +288,6 @@
       };
       nvim-autopairs.enable = true;
       wakatime.enable = true;
-			nvim-tree = {
-				enable = true;
-				disableNetrw = true;
-				hijackCursor = true;
-				syncRootWithCwd = true;
-				diagnostics = {
-					enable = true;
-					showOnDirs = true;
-				};
-				git = {
-					enable = true;
-					ignore = true;
-				};
-				filters = {
-					custom = [
-						"^.git$"
-						"^node_modules$"
-						"^vendor$"
-					];
-				};
-				actions = {
-					openFile = {
-						quitOnOpen = true;
-					};
-				};
-			};
     };
 
 		extraPlugins = [
