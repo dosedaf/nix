@@ -1,20 +1,22 @@
 # Edit this configuration file to define what should be installed on
 # your system.  Help is available in the configuration.nix(5) man page and in the NixOS manual (accessible by running ‘nixos-help’).
 { config, pkgs, lib, ... }: { imports = [ 
+	./nbfc.nix
 	./an515-58.nix
 ];
 
 	# Bootloader.
 	boot.loader.systemd-boot.enable = true;
-	boot.loader.efi.canTouchEfiVariables = true;
-	nix.settings.experimental-features = [ "nix-command flakes" ];
+	boot.loader.efi.canTouchEfiVariables = true; nix.settings.experimental-features = [ "nix-command flakes" ];
 	boot.kernelParams = [ "acpi_backlight=video"];
-
-	networking = {
+networking = {
 		hostName = "dosed"; # Define your hostname.
 		networkmanager.enable = true;
-	};
-	# networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
+	}; # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
+
+	systemd.services.NetworkManager-wait-online.enable = false;
+	systemd.network.wait-online.enable = false;
+	boot.initrd.systemd.network.wait-online.enable = false;
 
 	# Configure network proxy if necessary
 	# networking.proxy.default = "http://user:password@proxy:port/";
@@ -60,6 +62,7 @@
 	users.extraGroups.vboxusers.members = [ "yoda" ];
 
 	# Define a user account. Don't forget to set a password with ‘passwd’.
+	programs.zsh.enable = true;
 	users.defaultUserShell = pkgs.zsh;
 	users.users.yoda = {
 		isNormalUser = true;
@@ -69,7 +72,6 @@
 		# packages = with pkgs; [];
 	};
 
-	programs.zsh.enable = true;
 	fonts.packages = with pkgs; [ nerdfonts];
 
 	hardware.acpilight.enable = true;
@@ -82,6 +84,8 @@
 	};
 
 	environment.systemPackages = with pkgs; [
+		pavucontrol
+		nbfc-linux
 		mangohud
 		blueman
 		bluez
@@ -92,9 +96,6 @@
 		bash
 		git
 		neovim
-		zsh
-		kitty
-		kitty-themes
 
 		j4-dmenu-desktop
 		bemenu
@@ -107,7 +108,6 @@
 		libnotify
 
 		# sys utils
-		pavucontrol
 		lshw
 		geeqie
 
@@ -124,18 +124,9 @@
 	xdg.portal.enable = true;
 	xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
 
-	programs.hyprland = {
-		enable = true;
-		xwayland.enable = true;
-	};
-
 	services.xserver.enable = true;
 	services.displayManager.sddm.enable = true;
 	services.displayManager.sddm.wayland.enable = true;
-
-	environment.sessionVariables = {
-		NIXOS_OZONE_WL = "1";
-	};
 
 	hardware.graphics = {
 		enable = true;
@@ -149,7 +140,7 @@
 		powerManagement.finegrained = false;
 		open = false;
 		nvidiaSettings = true;
-		package = config.boot.kernelPackages.nvidiaPackages.stable;
+		package = config.boot.kernelPackages.nvidiaPackages.beta;
 	};
 
 	hardware.nvidia.prime = {
@@ -161,8 +152,8 @@
 	};
 
 	specialisation = {
-		on-the-go.configuration = {
-			system.nixos.tags = [ "on-the-go" ];
+		nongkrong.configuration = {
+			system.nixos.tags = [ "nongkrong" ];
 			hardware.nvidia = {
 				prime.offload.enable = lib.mkForce true;
 				prime.offload.enableOffloadCmd = lib.mkForce true;
@@ -173,7 +164,7 @@
 
 	hardware.bluetooth.enable = true;
 
-	# audio
+# audio
 	security.rtkit.enable = true;
 	services.pipewire = {
 		enable = true;
@@ -183,28 +174,28 @@
 		jack.enable = true;
 	};
 
+	programs.hyprland.enable = true;
+	/*
 	boot.kernelPackages = pkgs.linuxPackages; # (this is the default) some amdgpu issues on 6.10
 	programs = {
-		gamescope = {
-			enable = true;
-			capSysNice = true;
-		};
 		steam = {
 			enable = true;
-			gamescopeSession.enable = true;
+			# gamescopeSession.enable = true;
 			remotePlay.openFirewall = true;
 			dedicatedServer.openFirewall = true;
 			localNetworkGameTransfers.openFirewall = true;
 		};
 	};
 	hardware.xone.enable = true; # support for the xbox controller USB dongle
-	services.getty.autologinUser = "your_user";
+	services.getty.autologinUser = "yoda";
 	environment = {
 		loginShellInit = ''
 		[[ "$(tty)" = "/dev/tty1" ]] && ~/system/script/gs.sh
 		'';
 	};
+	*/
 
+	/*
 	services.tlp = {
 		enable = true;
 		settings = {
@@ -219,12 +210,11 @@
 			CPU_MIN_PERF_ON_BAT = 0;
 			CPU_MAX_PERF_ON_BAT = 20;
 
-			#Optional helps save long term battery health
-			#START_CHARGE_THRESH_BAT0 = 40; # 40 and bellow it starts to charge
-			STOP_CHARGE_THRESH_BAT0 = 80; # 80 and above it stops charging
-
+			START_CHARGE_THRESH_BAT1 = 40; # 40 and bellow it starts to charge
+			STOP_CHARGE_THRESH_BAT1 = 80; # 80 and above it stops charging
 		};
 	};
+	*/
 
 
 

@@ -36,7 +36,10 @@
               gopls.semanticTokens = true;
             };
           };
-          html.enable = true;
+					html = {
+						enable = true;
+						filetypes = [ "php" "blade" "html"];
+					};
           htmx.enable = true;
           lua_ls.enable = true;
           cssls.enable = true;

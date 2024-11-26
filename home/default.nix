@@ -13,6 +13,9 @@
     homeDirectory = "/home/yoda";
 		stateVersion = "24.05";
 		packages = with pkgs; [
+			prismlauncher
+			ida-free
+			burpsuite
 			# download manager
 			deluged
 			pyload-ng
@@ -35,8 +38,6 @@
 			nixpkgs-fmt             # Nix formatter
 			prettierd               # Prettier daemon for formatting
 			jetbrains.phpstorm
-			jetbrains.goland 
-			jetbrains.webstorm
 			wf-recorder
 			go
 			spotify
@@ -61,6 +62,7 @@
 
       # i fw w these
       kitty
+			kitty-themes
       fastfetch
       firefox
       brave
@@ -85,6 +87,10 @@
 			discord
 			php
     ];
+		
+		sessionVariables = {
+			NIXOS_OZONE_WL = "1";
+		};
   };
 
   programs = {
