@@ -1,6 +1,6 @@
 swww init &
 
-swww img ~/system/wallpaper/frieren.jpeg &
+swww img ../wallpaper/146518.jpg &
 
 nm-applet --indicator &
 
