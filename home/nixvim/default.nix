@@ -46,6 +46,8 @@
           jsonls.enable = true;
           clangd.enable = true;
           nixd.enable = true;
+					eslint.enable = true;
+					tsserver.enable = true;
 
           # PHP-specific LSP servers
           intelephense = {
@@ -136,6 +138,7 @@
             "lua"
             "llvm"
             "javascript"
+            "typescript"
             "php"
             "rust"
             "tmux"

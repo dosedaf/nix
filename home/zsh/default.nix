@@ -14,11 +14,11 @@
 		};
 		shellAliases = {
 			ll = "ls -l";
-			nixrbs = "sudo nixos-rebuild switch --flake ~/system#dosed";
-			nixrbt = "sudo nixos-rebuild test --flake ~/system#dosed";
-			nixrbb = "sudo nixos-rebuild boot --flake ~/system#dosed";
-			nixconf = "cd ~/system/nixos && nvim .";
-			homeconf = "cd ~/system/home && nvim .";
+			nixrbs = "sudo nixos-rebuild switch --flake ~/nix#dosed";
+			nixrbt = "sudo nixos-rebuild test --flake ~/nix#dosed";
+			nixrbb = "sudo nixos-rebuild boot --flake ~/nix#dosed";
+			nixconf = "cd ~/nix/nixos && nvim configuration.nix";
+			homeconf = "cd ~/nix/home && nvim default.nix";
 			crun = "g++ main.cpp -o main && ./main";
 			gaa = "git add --all";
 		};
