@@ -13,12 +13,11 @@
     homeDirectory = "/home/yoda";
 		stateVersion = "24.05";
 		packages = with pkgs; [
-			prismlauncher
+			pgadmin4
+			postman
+			planify
 			ida-free
 			burpsuite
-			# download manager
-			deluged
-			pyload-ng
 
 			# lsp
 			vscode-langservers-extracted
@@ -58,7 +57,6 @@
       # virtualisation
       distrobox
       clip
-      libgccjit
 
       # i fw w these
       kitty
