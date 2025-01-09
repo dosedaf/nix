@@ -13,7 +13,11 @@
     homeDirectory = "/home/yoda";
 		stateVersion = "24.05";
 		packages = with pkgs; [
-			pgadmin4
+			python311
+			obsidian
+			unrar
+			wireshark
+			gnumake42
 			postman
 			planify
 			ida-free

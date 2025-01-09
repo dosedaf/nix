@@ -10,7 +10,8 @@
 	boot.loader.efi.canTouchEfiVariables = true; 
 	nix.settings.experimental-features = [ "nix-command flakes" ];
 	boot.kernelParams = [ "acpi_backlight=video"];
-networking = {
+
+	networking = {
 		hostName = "dosed"; # Define your hostname.
 		networkmanager.enable = true;
 	}; # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -19,7 +20,7 @@ networking = {
 	systemd.network.wait-online.enable = false;
 	boot.initrd.systemd.network.wait-online.enable = false;
 
-	networking.nameservers = [ "1.1.1.1" "8.8.8.8"];
+	networking.nameservers = [ "1.1.1.1"];
 
 	# Configure network proxy if necessary
 	# networking.proxy.default = "http://user:password@proxy:port/";
@@ -102,6 +103,7 @@ networking = {
 	};
 
 	environment.systemPackages = with pkgs; [
+		fd
 		docker-compose
 		pavucontrol
 		nbfc-linux
@@ -194,6 +196,22 @@ networking = {
 	};
 
 	programs.hyprland.enable = true;
+
+	systemd.services.goser = {
+		description = "Simple Golang Web Server";
+		after = [ "network.target"];
+		wantedBy = ["multi-user.target"];
+		startLimitIntervalSec = 0;
+
+		serviceConfig = {
+			Type = "simple";
+			Restart = "always";
+			RestartSec = 1;
+			User = "yoda";
+			ExecStart = "/home/yoda/dops/systemd/go-server/main";
+		};
+
+	};
 	/*
 	boot.kernelPackages = pkgs.linuxPackages; # (this is the default) some amdgpu issues on 6.10
 	programs = {

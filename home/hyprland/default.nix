@@ -92,7 +92,9 @@
 				workspace_swipe = false;
 			};
 
+			#"$terminal" = "kitty -e tmux";
 			"$terminal" = "kitty";
+
 			"$fileManager" = "dolphin";
 			"$menu" = "rofi -show drun -show-icons";
 
