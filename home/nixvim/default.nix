@@ -25,6 +25,8 @@
 			}
 		];
 
+		colorschemes.kanagawa.enable = true;
+
     plugins = {
       lsp = {
         enable = true;
@@ -47,7 +49,8 @@
           clangd.enable = true;
           nixd.enable = true;
 					eslint.enable = true;
-					tsserver.enable = true;
+					ts_ls.enable = true;
+					pylsp.enable = true;
 
           # PHP-specific LSP servers
           intelephense = {
@@ -165,6 +168,7 @@
           "<leader>/" = "live_grep";
         };
       };
+
       treesitter-context.enable = true;
       treesitter-refactor.enable = true;
       treesitter-textobjects.enable = true;
@@ -321,6 +325,6 @@
 			pkgs.vimPlugins.tokyonight-nvim
 			pkgs.vimPlugins.bamboo-nvim
 		];
-		colorscheme = "bamboo";
+		# colorscheme = "bamboo";
   };
 }

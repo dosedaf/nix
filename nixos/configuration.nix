@@ -91,7 +91,10 @@
 		# packages = with pkgs; [];
 	};
 
-	fonts.packages = with pkgs; [ nerdfonts];
+	fonts.packages = with pkgs; [ 
+		nerd-fonts.fira-code
+	];
+	# fonts.packages = [ ... ] ++ builtins.filter lib.attrsets.isDerivation (builtins.attrValues pkgs.nerd-fonts);
 
 	hardware.acpilight.enable = true;
 	programs.light.enable = true;

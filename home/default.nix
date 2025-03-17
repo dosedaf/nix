@@ -13,7 +13,20 @@
     homeDirectory = "/home/yoda";
 		stateVersion = "24.05";
 		packages = with pkgs; [
-			python311
+			# java
+			wl-gammactl
+			devenv
+			jdk21_headless
+			netbeans
+
+			# python
+			# python313Packages.mypy
+			#   python313Packages.jupyter
+			python313
+			python313Packages.pip
+			# python313Packages.ipykernel
+
+			#python311
 			obsidian
 			unrar
 			wireshark

@@ -17,8 +17,9 @@
 
 				border_size = 1;
 				# "col.active_border" = "rgba(#e6e6e6) rgba(00ff99ee) 45deg";
-				"col.active_border" = "rgba(#e6e6e6)";
-				"col.inactive_border" = "rgba(595959aa)";
+				# "col.active_border" = "rgba(#e6e6e6)";
+				"col.active_border" = "0xffe6e6e6";
+				"col.inactive_border" = "0xAA595959";
 
 				resize_on_border = false;
 				allow_tearing = false;
@@ -148,6 +149,7 @@
 		}; #settings
 
 		extraConfig = ''
+			exec = wl-gammactl -c 0.935 -b 0.998 -g 0.806
 			exec-once=zsh ~/nix/script/start.sh
 			windowrule = workspace 1, $terminal
 			windowrule = workspace 2, firefox
