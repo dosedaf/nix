@@ -13,6 +13,8 @@
     homeDirectory = "/home/yoda";
 		stateVersion = "24.05";
 		packages = with pkgs; [
+			ranger
+			google-chrome
 			# java
 			wl-gammactl
 			devenv
@@ -97,7 +99,6 @@
       cmake
       pkg-config
       dust
-      dolphin
 
 			discord
 			php
