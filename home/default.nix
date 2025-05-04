@@ -127,5 +127,6 @@
         nixrbb = "sudo nixos-rebuild boot --flake ~/system#dosed";
       }; #shellAliases
     }; # bash
+
   };  # programs
 }

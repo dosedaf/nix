@@ -151,10 +151,11 @@
 		extraConfig = ''
 			exec = wl-gammactl -c 0.935 -b 0.998 -g 0.806
 			exec-once=zsh ~/nix/script/start.sh
-			windowrule = workspace 1, $terminal
-			windowrule = workspace 2, firefox
-			windowrule = workspace 4, discord
-			windowrule = workspace 5, spotify
+
+			windowrule = workspace 1, title:$terminal
+			windowrule = workspace 2, title:firefox
+			windowrule = workspace 4, title:discord
+			windowrule = workspace 5, title:spotify
 		'';
 
 	}; # wayland.windowManager.hyprland
