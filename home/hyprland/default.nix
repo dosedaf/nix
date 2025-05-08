@@ -22,14 +22,14 @@
 				"col.inactive_border" = "0xAA595959";
 
 				resize_on_border = false;
-				allow_tearing = false;
+				allow_tearing = true;
 				layout = "dwindle";
 			};
 
 			decoration = {
 				rounding = 5;
 				active_opacity = 1;
-				inactive_opacity = 0.8;
+				inactive_opacity = 1;
 
 				# drop_shadow = true;
 				# shadow_range = 4;
@@ -152,10 +152,10 @@
 			exec = wl-gammactl -c 0.935 -b 0.998 -g 0.806
 			exec-once=zsh ~/nix/script/start.sh
 
-			windowrule = workspace 1, title:$terminal
-			windowrule = workspace 2, title:firefox
-			windowrule = workspace 4, title:discord
-			windowrule = workspace 5, title:spotify
+			windowrule = workspace 1, class:$terminal
+			windowrule = workspace 2, class:firefox
+			windowrule = workspace 4, class:discord
+			windowrule = workspace 5, class:spotify
 		'';
 
 	}; # wayland.windowManager.hyprland

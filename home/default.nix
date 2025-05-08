@@ -13,6 +13,16 @@
     homeDirectory = "/home/yoda";
 		stateVersion = "24.05";
 		packages = with pkgs; [
+			vulkan-tools
+			nvidia-vaapi-driver
+			btop
+			qbittorrent
+			mangohud
+			bottles
+			deluge
+			staruml
+			wineWowPackages.stable
+			w3m
 			ranger
 			google-chrome
 			# java
@@ -127,6 +137,8 @@
         nixrbb = "sudo nixos-rebuild boot --flake ~/system#dosed";
       }; #shellAliases
     }; # bash
+
+		mangohud.enable = true;
 
   };  # programs
 }

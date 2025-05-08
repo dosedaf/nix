@@ -9,7 +9,8 @@
 	boot.loader.systemd-boot.enable = true;
 	boot.loader.efi.canTouchEfiVariables = true; 
 	nix.settings.experimental-features = [ "nix-command flakes" ];
-	boot.kernelParams = [ "acpi_backlight=video"];
+	boot.kernelParams = [ "acpi_backlight=video" "nvidia-drm.modeset=1" ];
+
 
 	networking = {
 		hostName = "dosed"; # Define your hostname.
@@ -169,19 +170,22 @@
 		modesetting.enable = true;
 		powerManagement.enable = false;
 		powerManagement.finegrained = false;
-		open = true;
+		open = false;
 		nvidiaSettings = true;
 		package = config.boot.kernelPackages.nvidiaPackages.stable;
 	};
 
 	hardware.nvidia.prime = {
 		# default is sync. use on-the-go if u were to go outside
-		sync.enable = true;
+		# sync.enable = true;
+		offload.enable = true;
+		offload.enableOffloadCmd = true;
 
-		intelBusId = "PCI:01:00:0";
-		nvidiaBusId = "PCI:02:00:0";
+		intelBusId = "PCI:00:02:0";
+		nvidiaBusId = "PCI:01:00:0";
 	};
 
+	/*
 	specialisation = {
 		nongkrong.configuration = {
 			system.nixos.tags = [ "nongkrong" ];
@@ -192,6 +196,7 @@
 			};
 		};
 	};
+*/
 
 	hardware.bluetooth.enable = true;
 
@@ -222,6 +227,8 @@
 		};
 
 	};
+
+	nix.gc.dates = "weekly";
 	/*
 	boot.kernelPackages = pkgs.linuxPackages; # (this is the default) some amdgpu issues on 6.10
 	programs = {
